@@ -1,15 +1,20 @@
 import './product.style.css';
 
 
-const Product = ({name, price, currency, image}) =>{
+const Product = ({name, price, currency, image, isInCart}) =>{
     return(
         <div className="product thumbnail">
-        <img src={image} alt="product" />
+        <img src={image} alt="product img" />
         <div className="caption">
             <h3>{name}</h3>
             <div className="product__price">{price} {currency}</div>
             <div className="product__button-wrap">
-                <button>Add to Cart</button>
+                <button
+                    className={isInCart ? 'btn btn-danger' : 'btn btn-primary'}
+                    onClick = { () => console.log(`${name} is added to cart`)}
+                >
+                    {isInCart ? 'Remove' : 'Add to cart'}
+                </button>
             </div>
         </div>
     </div>
