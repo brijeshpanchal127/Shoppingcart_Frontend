@@ -35,6 +35,8 @@ const rootReducer=(state=defaultState1, action)=>{
 
             case TOTAL_AMOUNT_AFTER_REMOVING_PRODUCT_FROM_CART:
                 let removedPrice = parseInt(action.data.data.price);
+                console.log(removedPrice);
+                console.log(action.data.data);
                 let total = newState.totalAmount - removedPrice;
                 return {
                     ...newState,
