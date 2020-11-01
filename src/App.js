@@ -2,8 +2,15 @@ import ProductList from './components/ProductList/productList.component'
 import Cart from './components/Cart/cart.component';
 import './App.css';
 import productData from './data/products';
+import {useSelector} from 'react-redux';
+import React from 'react';
 
 function App() {
+
+
+
+
+
   return (
     <div className="container">
     <div className="row">

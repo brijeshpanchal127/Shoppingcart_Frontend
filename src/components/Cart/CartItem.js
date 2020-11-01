@@ -1,6 +1,8 @@
 import React from 'react';
 
 const CartItem = ({ name, price, currency, onClick }) => {
+
+    
     return (
         <div className="cart-item">
             <div>
