@@ -1,5 +1,5 @@
 import './product.style.css';
-import {addDataToCart, removeSelectedProductFromCart, selectedProductsTotal, totalAmountAfterRemoveProductFromCart} from '../../actions/action';
+import {addDataToCart, removeSelectedProductFromCart, totalAmountAfterRemoveProductFromCart} from '../../actions/action';
 import {useDispatch} from 'react-redux';
 import { useState } from 'react';
 
@@ -15,12 +15,11 @@ const Product = ({name, price, currency, image, index}) =>{
 
         if(isInCart){
             dispatch(removeSelectedProductFromCart({data}));
-            dispatch(totalAmountAfterRemoveProductFromCart({data}))
+            dispatch(totalAmountAfterRemoveProductFromCart({data}));
             isInCartSelected(false);
         }
         else{
             dispatch(addDataToCart({data}));
-            dispatch(selectedProductsTotal(({data})));
             isInCartSelected(true);
         
         }
