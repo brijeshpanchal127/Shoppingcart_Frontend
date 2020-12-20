@@ -3,8 +3,25 @@ import Cart from './components/Cart/cart.component';
 import './App.css';
 import productData from './data/products';
 import React from 'react';
+import axios from 'axios';
+
 
 function App() {
+
+    var config = {
+        method: 'get',
+        url: 'http://localhost:3000/',
+        headers: { }
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log("Hello");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
 
   return (
     <div className="container">

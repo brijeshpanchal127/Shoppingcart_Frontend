@@ -22,6 +22,8 @@ const rootReducer=(state=defaultState1, action)=>{
             let newArray= [...newState.selectedDataForCart, action.data.data]
             let selectedPrice = parseInt(action.data.data.price);
             let newTotal = newState.totalAmount + selectedPrice;
+            console.log("Added Item");
+            console.log(newArray)
             return {
                 ...newState,
                 selectedDataForCart:newArray,
@@ -30,23 +32,19 @@ const rootReducer=(state=defaultState1, action)=>{
 
             case TOTAL_AMOUNT_AFTER_REMOVING_PRODUCT_FROM_CART:
                 let removedPrice = parseInt(action.data.data.price);
-                console.log(removedPrice);
-                console.log(action.data.data);
                 let total = newState.totalAmount - removedPrice;
                 return {
                     ...newState,
                     totalAmount:total
                 }
-
+ 
             case REMOVE_SELECTED_PRODUCT_FROM_CART:
-            let itemValue = action.data.data;
-            const index = newState.selectedDataForCart.indexOf(itemValue);
-            console.log(index);
-            const array1 = [...newState.selectedDataForCart];
-            array1.splice(index,1);
-            return {
+                const removeSelectedItemIndex = newState.selectedDataForCart.indexOf(action.data.data.name)
+                let newArray1 = newState.selectedDataForCart.splice(removeSelectedItemIndex, 1);
+                console.log(newArray1);
+                return {
                 ...newState,
-                selectedDataForCart:array1
+                selectedDataForCart:newArray1
             };
 
 
