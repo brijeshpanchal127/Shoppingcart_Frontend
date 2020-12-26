@@ -8,6 +8,7 @@ const CartItem = ({ name, price, currency, index}) => {
     const dispatch = useDispatch();
 
     const removeSelectedItemFromCart = (data) =>{
+        console.log("shdfkjhdfgkfjfhgkl",data)
         dispatch(removeSelectedProductFromCart({data}));
         dispatch(totalAmountAfterRemoveProductFromCart({data}))
     }

@@ -1,29 +1,39 @@
 import './product.style.css';
 import {addDataToCart, removeSelectedProductFromCart, totalAmountAfterRemoveProductFromCart} from '../../actions/action';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
-
 
 
 const Product = ({name, price, currency, image, index}) =>{
 
+ 
+
+    const items = useSelector(state => state.selectedDataForCart)
+   
     const dispatch = useDispatch();
     
-    const [isInCart, isInCartSelected]  = useState(false);
+
+    const isInCart = () => {
+        if (items.find(element => element.name === name)) {
+            return true;
+        } else  return false;
+    }
 
     const passDataToCart = (data) =>{
 
-        if(isInCart){
+        if(isInCart()){
             dispatch(removeSelectedProductFromCart({data}));
             dispatch(totalAmountAfterRemoveProductFromCart({data}));
-            isInCartSelected(false);
+            // isInCartSelected(false);
         }
         else{
             dispatch(addDataToCart({data}));
-            isInCartSelected(true);
+            // isInCartSelected(true);
         
         }
     }
+
+    
 
 
 
@@ -35,10 +45,10 @@ const Product = ({name, price, currency, image, index}) =>{
             <div className="product__price">{price} {currency}</div>
             <div className="product__button-wrap">
                 <button
-                    className={isInCart ? 'btn btn-danger' : 'btn btn-primary'}
+                    className={items && items.find(element => element.name === name) ? 'btn btn-danger' : 'btn btn-primary'}
                     onClick = {()=>passDataToCart({name,price,currency, index})}
                 >
-                    {isInCart ? 'Remove' : 'Add to cart'}
+                    { items && items.find(element => element.name === name) ? 'Remove' : 'Add to cart'}
                 </button>
             </div>
         </div>
