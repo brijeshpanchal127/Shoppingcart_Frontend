@@ -43,7 +43,8 @@ const rootReducer=(state=defaultState1, action)=>{
             case REMOVE_SELECTED_PRODUCT_FROM_CART:
                 const removeSelectedItemIndex = newState.selectedDataForCart.indexOf(action.data.data.name)
                 newState.selectedDataForCart.splice(removeSelectedItemIndex, 1);
-      
+                
+                newState.selectedDataForCart = newState.selectedDataForCart.slice() 
                 return {
                 ...newState
             };
