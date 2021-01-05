@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {removeSelectedProductFromCart, totalAmountAfterRemoveProductFromCart} from '../../actions/action';
-
+import axios from 'axios';
 
 const CartItem = ({ name, price, currency, index}) => {
 

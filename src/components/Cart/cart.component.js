@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CartItem from './CartItem';
 import './cart.style.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
-import {updateCartAfterPlaceOrder} from '../../actions/action';
+import { useDispatch } from 'react-redux';
+import { updateCartAfterPlaceOrder } from '../../actions/action';
 
 const Cart = () => {
 
@@ -28,7 +28,7 @@ const Cart = () => {
             axios.patch("http://localhost:3000/placeorder", { items })
                 .then(function (response) {
                     console.log(response);
-                    dispatch(updateCartAfterPlaceOrder());         
+                    dispatch(updateCartAfterPlaceOrder());
                 })
                 .catch(function (error) {
                     console.log(error);
