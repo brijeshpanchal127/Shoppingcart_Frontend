@@ -3,10 +3,12 @@ import CartItem from './CartItem';
 import './cart.style.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {updateCartAfterPlaceOrder} from '../../actions/action';
 
 const Cart = () => {
 
-
+    const dispatch = useDispatch();
     const items = useSelector(state => state.selectedDataForCart)
     const total = useSelector(state => state.totalAmount);
 
@@ -16,48 +18,24 @@ const Cart = () => {
     // request to backend
     // response from backend
 
-    const chechOut = () =>{
-        axios.post("http://localhost:3000/")
-        .then(function(response){
-            console.log(response)
-            if(response.data.data === true){
-                alert("Thank you for shopping with us");
-             
-            }else{
-                alert("sorry your order is not proceed");
-            }
-        })
-        .catch(function(error){
-            console.log(error)
-        })
-    }
 
 
-const placeorder = () =>{
-    const chechOut = () =>{
-        axios.post("http://localhost:3000/")
-        .then(function(response){
-            console.log(response)
-            if(response.data.data === true){
-                alert("Thank you for shopping with us");
-             
-            }else{
-                alert("sorry your order is not proceed");
-            }
-        })
-        .catch(function(error){
-            console.log(error)
-        })
-    }
+
+    const placeorder = ({ items }) => {
+
+        console.log("button clicked");
+        if (items.length > 0) {
+            axios.patch("http://localhost:3000/placeorder", { items })
+                .then(function (response) {
+                    console.log(response);
+                    dispatch(updateCartAfterPlaceOrder());         
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
 
 
-    
-    if(items && items.length > 0){
-        return <button  onClick={(chechOut())}  className='btn btn-success'>Place order</button>
-    }
-    else{
-        return <p>Must Buy one Product</p>
-    }
     }
 
 
@@ -79,13 +57,13 @@ const placeorder = () =>{
                             </div>
                         )}
                         <div className="cart__total">Total: {total} EUR</div>
-                        {placeorder()}
-                        {/* <button className='btn btn-success'>Place order</button> */}
+                        {/* {placeorder()} */}
+                        <button className='btn btn-success' onClick={() => placeorder({ items })}>Place order</button>
 
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     );
 }
 

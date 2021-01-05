@@ -2,7 +2,7 @@ const PASS_DATA_TO_CART = "PASS_DATA_TO_CART";
 const SELECTED_PRODUCTS_TOTAL_PRICE= "SELECTED_PRODUCTS_TOTAL_PRICE";
 const REMOVE_SELECTED_PRODUCT_FROM_CART = "REMOVE_SELECTED_PRODUCT_FROM_CART";
 const TOTAL_AMOUNT_AFTER_REMOVING_PRODUCT_FROM_CART = "TOTAL_AMOUNT_AFTER_REMOVING_PRODUCT_FROM_CART";
-
+const UPDATE_CART_AFTER_PLACE_ORDER = "UPDATE_CART_AFTER_PLACE_ORDER";
 
 const defaultState1 = {
 
@@ -48,6 +48,12 @@ const rootReducer=(state=defaultState1, action)=>{
                 return {
                 ...newState
             };
+
+            case UPDATE_CART_AFTER_PLACE_ORDER:
+                return {
+                    ...newState,
+                    selectedDataForCart:[]
+                }
 
 
         default: return newState;
